@@ -1,4 +1,4 @@
-import { TeachersDto } from 'src/teachers/teachers.dto';
+import { TeachersDto } from 'src/teachers/Dto/teachers.dto';
 
 export class SubjectsDto {
   name: string;

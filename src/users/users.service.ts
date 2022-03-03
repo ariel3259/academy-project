@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersRepository } from 'src/repositories/users.repository';
-import { UsersDto } from './users.dto';
+import { UsersDto } from './Dto/users.dto';
 import * as EmailValidator from 'email-validator';
 
 @Injectable()
@@ -17,9 +17,7 @@ export class UsersService {
     if (
       !user.name ||
       !user.last_name ||
-      !user.phone_number ||
-      !user.country ||
-      !user.state ||
+      !user.dni ||
       !user.email ||
       !user.password
     )
@@ -45,6 +43,7 @@ export class UsersService {
     const verifyUser: UsersDto = await this.usersRepository.findOne({
       email: user.email,
     });
+    if (!verifyUser) throw new BadRequestException('The user does not exits');
     if (!(await bcrypt.compare(user.password, verifyUser.password)))
       throw new BadRequestException('Wrong password');
     const token: string = jwt.sign(
@@ -55,7 +54,7 @@ export class UsersService {
       },
       'loremloremlorem',
       {
-        expiresIn: '30m',
+        expiresIn: '1h',
       },
     );
     return {

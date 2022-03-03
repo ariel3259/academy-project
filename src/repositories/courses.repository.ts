@@ -1,26 +1,10 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinColumn,
-  OneToMany,
-} from 'typeorm';
-import { StudentsRepository } from './students.repository';
-import { SubjectsRepository } from './subjects.repository';
-
+import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 @Entity('courses')
+@Unique(['grade', 'speciality'])
 export class CoursesRepository {
   @PrimaryGeneratedColumn() id: number;
-  @Column() year: number;
+  @Column() year: string;
   @Column() grade: string;
-  @ManyToMany(() => SubjectsRepository, (subjects) => (subjects = subjects))
-  @JoinColumn()
-  subjects: SubjectsRepository[];
-  @Column() sate: boolean;
-  @OneToMany(() => StudentsRepository, (students) => (students = students))
-  @JoinColumn()
-  students: StudentsRepository[];
   @Column() state: boolean;
   @Column() speciality: string;
 }

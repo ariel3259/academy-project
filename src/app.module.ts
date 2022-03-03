@@ -13,6 +13,10 @@ import { StudentsRepository } from './repositories/students.repository';
 import { CoursesRepository } from './repositories/courses.repository';
 import { SubjectsRepository } from './repositories/subjects.repository';
 import { SubjectsModule } from './subjects/subjects.module';
+import { CoursesModule } from './courses/courses.module';
+import { CoursesAcademyRepository } from './repositories/courses_academy.repository';
+import { CoursesSubjectsRepository } from './repositories/courses_subjects.repository';
+import { CoursesStudentsRepository } from './repositories/courses_students.repository';
 
 @Module({
   imports: [
@@ -31,6 +35,9 @@ import { SubjectsModule } from './subjects/subjects.module';
         StudentsRepository,
         SubjectsRepository,
         CoursesRepository,
+        CoursesAcademyRepository,
+        CoursesStudentsRepository,
+        CoursesSubjectsRepository,
       ],
       synchronize: true,
     }),
@@ -39,11 +46,17 @@ import { SubjectsModule } from './subjects/subjects.module';
     TeachersModule,
     StudentsModule,
     SubjectsModule,
+    CoursesModule,
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    /*
     consumer.apply(AuthentificationMiddleware).forRoutes('api/academy');
     consumer.apply(AuthentificationMiddleware).forRoutes('api/teachers');
+    consumer.apply(AuthentificationMiddleware).forRoutes('api/students');
+    consumer.apply(AuthentificationMiddleware).forRoutes('api/subjects');
+    consumer.apply(AuthentificationMiddleware).forRoutes('api/courses');
+    */
   }
 }

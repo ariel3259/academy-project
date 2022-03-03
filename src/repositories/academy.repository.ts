@@ -9,7 +9,7 @@ import {
 import { UsersRepository } from './users.repository';
 
 @Entity('academy')
-@Unique(['name', 'street', 'type'])
+@Unique(['user'])
 export class AcademyRepository {
   @PrimaryGeneratedColumn() id: number;
   @Column() name: string;

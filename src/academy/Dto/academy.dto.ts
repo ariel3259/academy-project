@@ -1,4 +1,4 @@
-import { UsersDto } from "src/users/users.dto";
+import { UsersDto } from 'src/users/Dto/users.dto';
 
 export class AcademyDto {
   id: number;
